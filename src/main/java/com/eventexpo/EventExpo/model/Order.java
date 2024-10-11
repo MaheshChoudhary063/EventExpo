@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "`order`")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,5 +29,5 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
-    private User buyer;
+    private UserInfo buyer;
 }
