@@ -15,9 +15,9 @@ public class UserInfoUserDetails implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public UserInfoUserDetails(UserInfo userInfo) {
-        this.name = userInfo.getName();
-        this.password = userInfo.getPassword();
-        this.authorities = List.of(new SimpleGrantedAuthority(userInfo.getRoles())); // Ensure roles are prefixed with 'ROLE_'
+        name = userInfo.getName();
+        password = userInfo.getPassword();
+        authorities = List.of(new SimpleGrantedAuthority(userInfo.getRoles()));
     }
 
     @Override

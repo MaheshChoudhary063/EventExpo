@@ -5,7 +5,7 @@ import com.eventexpo.EventExpo.model.UserInfo;
 import com.eventexpo.EventExpo.service.JwtService;
 import com.eventexpo.EventExpo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -33,25 +33,25 @@ public class UserController {
     public String welcome() {
         return "Welcome, this endpoint is not secure.";
     }
-    @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    @PostMapping("/login")
+    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
             if (authentication.isAuthenticated()) {
-                return ResponseEntity.ok(jwtService.generateToken(authRequest.getUsername()));
+                return jwtService.generateToken(authRequest.getUsername());
             } else {
                 throw new UsernameNotFoundException("Invalid user request!");
             }
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            throw e;
         }
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> addNewUser(@RequestBody UserInfo userInfo) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(userInfo));
+    public String addNewUser(@RequestBody UserInfo userInfo) {
+        return userService.addUser(userInfo);
     }
 
     @GetMapping("/{id}")
