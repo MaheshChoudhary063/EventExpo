@@ -1,5 +1,6 @@
 package com.eventexpo.EventExpo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "category")
+    @JsonManagedReference
+    private List<Event> events;
 }

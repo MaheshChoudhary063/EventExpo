@@ -1,5 +1,6 @@
 package com.eventexpo.EventExpo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,14 +25,11 @@ public class Event {
     private String imageUrl;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String price;
     private boolean isFree;
+    private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "category_id") // Foreign key column
+    @JsonBackReference
     private Category category;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizer_id", nullable = false)
-    private UserInfo organizer;
 }

@@ -4,11 +4,13 @@ import com.eventexpo.EventExpo.model.Category;
 import com.eventexpo.EventExpo.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CategoryService {
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -26,7 +28,7 @@ public class CategoryService {
 
     public Category updateCategory(Long id, Category categoryDetails) {
         return categoryRepository.findById(id).map(category -> {
-            category.setName(categoryDetails.getName());
+            if (categoryDetails.getName() != null) category.setName(categoryDetails.getName());
             return categoryRepository.save(category);
         }).orElseThrow(() -> new RuntimeException("Category not found with id " + id));
     }

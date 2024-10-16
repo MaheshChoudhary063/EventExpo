@@ -23,11 +23,12 @@ public class Order {
     private String stripeId;
     private String totalAmount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buyer_id", nullable = false)
-    private UserInfo buyer;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "buyer_id", nullable = false)
+//    private UserInfo buyer;
 }

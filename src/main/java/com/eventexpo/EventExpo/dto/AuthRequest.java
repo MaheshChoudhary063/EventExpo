@@ -1,11 +1,17 @@
 package com.eventexpo.EventExpo.dto;
+//
+//import lombok.*;
+//
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class AuthRequest {
-    private String username;
-    private String password;
+        private String email;
+        private String password;
+
 }

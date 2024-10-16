@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class EventService {
+
     @Autowired
     private EventRepository eventRepository;
 
@@ -26,16 +28,8 @@ public class EventService {
 
     public Event updateEvent(Long id, Event eventDetails) {
         return eventRepository.findById(id).map(event -> {
-            event.setTitle(eventDetails.getTitle());
-            event.setDescription(eventDetails.getDescription());
-            event.setLocation(eventDetails.getLocation());
-            event.setImageUrl(eventDetails.getImageUrl());
-            event.setStartDateTime(eventDetails.getStartDateTime());
-            event.setEndDateTime(eventDetails.getEndDateTime());
-            event.setPrice(eventDetails.getPrice());
-            event.setFree(eventDetails.isFree());
-            event.setCategory(eventDetails.getCategory());
-            event.setOrganizer(eventDetails.getOrganizer());
+            if (eventDetails.getTitle() != null) event.setTitle(eventDetails.getTitle());
+            // Repeat for other fields
             return eventRepository.save(event);
         }).orElseThrow(() -> new RuntimeException("Event not found with id " + id));
     }
