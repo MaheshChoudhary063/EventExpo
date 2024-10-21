@@ -24,5 +24,5 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles;// Storing roles as a list of strings
+    private Set<String> roles;
 }
